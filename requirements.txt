@@ -1,9 +1,11 @@
 streamlit
 langchain
 langchain_core
-langchain_text_splitter
+langchain_community
+langchain_text_splitters
 langchain_groq
 langchain_huggingface
 pypdf
 faiss_cpu
 python_dotenv
+ipykernel
