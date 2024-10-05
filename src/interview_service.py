@@ -16,7 +16,7 @@ from langchain_core.runnables.history import RunnableWithMessageHistory
 class InterviewService:
 
     def __init__(self) -> None:
-        print("Starting server....")
+        print("Starting server...")
         self.setup()
         self.config={"configurable": {"session_id": "default_session"}}
         pass
