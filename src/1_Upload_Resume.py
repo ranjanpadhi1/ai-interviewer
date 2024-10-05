@@ -45,7 +45,6 @@ if resume:
             emp_info['yoe'] = str(yoe)
             emp_info['company'] = company
             emp_info['interview_type'] = interview_type
-            emp_info['history'] = st.session_state.chat_history
 
             msg.warning("Starting Interview . . .")
             resp = service.start_interview(emp_info)
