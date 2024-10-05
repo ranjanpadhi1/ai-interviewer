@@ -39,7 +39,7 @@ if resume:
         company = st.text_input("Which company interview you want to mock?")
         interview_type = st.selectbox("Select Interview Type", options=["Coding", "System Design", "Behavioural"])
         submit = st.button("Start Interview")
-
+    
         if submit:
             msg = st.empty()
             emp_info['yoe'] = str(yoe)

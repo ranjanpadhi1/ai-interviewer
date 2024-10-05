@@ -1,11 +1,13 @@
 import streamlit as st
 import time
 from interview_service import InterviewService
+import pyttsx3
+import threading
 
 st.title("Interview Chatbot")
 
-if 'service' not in st.session_state:
-    st.error("Invalid Session !")
+if 'service' not in st.session_state or len(st.session_state.chat_history) == 0:
+    st.error("Interview not started yet !")
     st.stop()
 
 if 'user_input' not in st.session_state:
@@ -25,14 +27,24 @@ def chats():
 
 chats()
 
+def speak_text_in_thread(text):
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[0].id)   
+    engine.say(text)
+    print(text)
+    engine.runAndWait()
+
 text = ""
 def stream_fn(stream):
     global text
     text = ""
     for chunk in stream:
+        # speak_text_in_thread(chunk.content)
         text += chunk.content
         yield chunk.content
         time.sleep(0.03)
+
 
 if user_input := st.chat_input():
     st.session_state.chat_history.append({"role": "human", "content": user_input})

@@ -9,3 +9,5 @@ pypdf
 faiss_cpu
 python_dotenv
 ipykernel
+pyttsx3
+gtts
