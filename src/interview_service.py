@@ -23,7 +23,7 @@ class InterviewService:
 
     def setup(self):
         self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        self.llm = ChatGroq(model="Gemma2-9b-It")    
+        self.llm = ChatGroq(model="llama-3.1-70b-versatile")    # Gemma2-9b-It
         self.history = ChatMessageHistory()
 
     def load_file(self, file):
@@ -64,11 +64,16 @@ class InterviewService:
             ("human", "{input}")
         ])
 
-        rag_chain = prompt | self.llm | StrOutputParser()
-        self.interview_chain = RunnableWithMessageHistory(rag_chain, self.get_session_history, input_messages_key="input", output_messages_key="answer")
+        rag_chain = prompt | self.llm
+        self.interview_chain = RunnableWithMessageHistory(
+            rag_chain, 
+            self.get_session_history, 
+            input_messages_key="input", 
+            history_messages_key="history"
+        )
 
         emp_info["input"] = interview_start
-        return self.interview_chain.invoke(emp_info, self.config)
+        return self.interview_chain.invoke(emp_info, self.config).content
     
     def interview_qna(self, input):
         self.emp_info['input'] = input

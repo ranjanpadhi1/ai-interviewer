@@ -30,8 +30,8 @@ def stream_fn(stream):
     global text
     text = ""
     for chunk in stream:
-        text += chunk
-        yield chunk
+        text += chunk.content
+        yield chunk.content
         time.sleep(0.03)
 
 if user_input := st.chat_input():
@@ -45,8 +45,7 @@ if user_input := st.chat_input():
     bot_response = text
     text = ""
     output_placeholder.empty()
-    st.session_state.user_input = ""
-    
+
     st.session_state.chat_history.append({"role": "ai", "content": bot_response})
     chats()
 
