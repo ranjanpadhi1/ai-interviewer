@@ -22,8 +22,8 @@ class InterviewService:
         pass
 
     def setup(self):
-        self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
-        self.llm = ChatGroq(model="llama-3.1-70b-versatile", max_tokens=200)    # Gemma2-9b-It
+        self.embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2") #all_mpnet_base_v2
+        self.llm = ChatGroq(model="llama-3.1-70b-versatile", streaming=True, max_tokens=200)    # Gemma2-9b-It
         self.history = ChatMessageHistory()
 
     def load_file(self, file):
